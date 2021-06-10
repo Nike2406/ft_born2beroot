@@ -59,3 +59,19 @@ cat /var/log/sudo/sudo_log | grep 'COMMAND' | wc -l -
 	fi
 
 which ifconfig - поиск пути комманды ifconfig
+
+lighttpd - вебсервер
+MariaDB - ответвление MySQL, отличие в отрытости разработки
+
+Настройка MariaDB:
+	$ sudo apt install mariadb-server - установка
+	$ sudo mysql_secure_installation - настройка (везде yes, кроме установки пароля рута)
+	$ sudo mariadb - вход в оболочку MariaDB
+	$ CREATE DATABASE <database-name>; - создание базы (prochell_database)
+	$ GRANT ALL ON <database-name>.* TO '<username-2>'@'localhost' IDENTIFIED BY '<password-2>' WITH GRANT OPTION;
+		- создание пользователи для дб и предоставление ему полных привелегий для дб
+		(GRANT ALL ON <prochell_database>.* TO 'prochell'@'localhost' IDENTIFIED BY '**password**' WITH GRANT OPTION;)
+	$ FLUSH PRIVILEGES;
+	$ exit
+	$ mariadb -u <username-2> -p - проверка юзера
+	$ SHOW DATABASES; - проверка бд
