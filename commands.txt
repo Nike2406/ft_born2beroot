@@ -1,0 +1,61 @@
+Проверка версии
+	# dpkg -l | grep sudo // grep etc
+Политика паролей
+	$ sudo vim /etc/login.defs
+Конфиг ssh
+	$ sudo vim /etc/ssh/sshd_config.
+Конфиг sudo
+	$ sudo vi /etc/sudoers.d/sudo_config
+Создание пользователя
+	$ sudo adduser <username>
+Проверка пользователя
+	$ getent passwd <username>
+	$ sudo chage -l <username>
+Создание новой группы
+	$ sudo addgroup <group_name>
+Добавление пользователя в группу
+	$ sudo adduser <username> <group_name>
+Проверка группы
+	$ getent group user42
+
+Настройка crontab
+	vim /etc/crontab
+	vim /usr/bin/monitoring.sh
+	crontab -e - настройка и редактирование
+	crontab -l - вывод задач в расписании пользователя
+	crontab -r - удаление правила
+lscpu - информация по процессору
+grep - поиск совпадений
+awk - поиск совпадений значений, например
+	lscpu | grep 'CPU(s):' | awk 'NR == 1 {print $2}'
+		lscpu 						- вывод таблицы по процессору
+		grep 'CPU(s):' 				- поиск ключа 'CPU(s):'
+		awk 'NR == 1 {print $2}' 	- поиск одного значения во втором столбце
+free | grep 'Mem:' | awk 'NR == 1 {printf"%s/%sMB (%.2f%%)", $3 / 1024, $2 / 1024, $3 * 100 / $2})
+df -h | grep 'LVMGroup-root'
+sudo apt-get install sysstat - для мониторинга mpstat (cpu)
+mpstat | awk 'NR == 1 {printf"%.1f%%", 100 - $12}' - загрузка цп
+who -b | awk 'printf"%s %s", $3, $4}' - время последней перезагрузки
+
+$ apt-get install net-tools - установка для nestat
+$ netstat -t
+	-a - показываеть все соединений - активные (non-listening - те которые установленные)
+		 и те которые только listening
+	-t - tcp
+	-u - udp
+	-n - показывать IP адреса вместо отрезолвенных хостов в домены
+	-l - показывать только listening соединений
+who - пользователи в системе
+ifconfig | grep 'inet' | awk 'NR == 1 {print $2}' - IP
+ifconfig | grep 'ether' | awk 'NR == 1 {print $2}' - MAC
+cat /var/log/sudo/sudo_log | grep 'COMMAND' | wc -l -
+	количество использований sudo
+
+Для вывода использования LVM
+	lvm=(lsblk | grep 'lvm' | wc -l)
+	if (("$lvm"));
+	then tmp="yes"
+	else tmp="no"
+	fi
+
+which ifconfig - поиск пути комманды ifconfig
