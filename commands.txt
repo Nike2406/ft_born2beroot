@@ -21,6 +21,8 @@
 	$ sudo addgroup <group_name>
 Добавление пользователя в группу
 	$ sudo adduser <username> <group_name>
+Удалить пользователя из группы
+	gpasswd -d пользователь группа
 Проверка группы
 	$ getent group user42
 Проверка AppArmor
@@ -103,10 +105,19 @@ MariaDB - ответвление MySQL, отличие в отрытости р�
 	$ ssh prochell@10.21.31.81 -p 4242 - подключение через ssh к виртуальной машине
 
 
-
-
-	LVM,
-	AppArmor,
-	apt/aptitude,
-	Debian/CentOS
-
+Очистка MariaDB:
+1.	$ sudo apt-get --purge remove mariadb*
+	$ sudo apt-get autoremove
+	$ sudo apt-get autoclean
+	$ sudo apt-get --purge remove mysql*
+	$ sudo apt-get autoremove
+	$ sudo apt-get autoclean
+2.	$ sudo rm -rf /etc/mysql
+	$ sudo rm -rf /var/lib/mysql
+3.	$ sudo apt install mariadb-server
+	$ sudo mysql_secure_installation
+		enter -> no -> yes*
+4.	$ sudo mariadb
+	$ CREATE DATABASE prochell_database;
+	$ GRANT ALL ON prochell_database.* TO 'prochell'@'localhost' IDENTIFIED BY '!Nike45240690!' WITH GRANT OPTION;
+	$ FLUSH PRIVILEGES;
