@@ -105,19 +105,29 @@ MariaDB - ответвление MySQL, отличие в отрытости р�
 	$ ssh prochell@10.21.31.81 -p 4242 - подключение через ssh к виртуальной машине
 
 
-Очистка MariaDB:
-1.	$ sudo apt-get --purge remove mariadb*
-	$ sudo apt-get autoremove
-	$ sudo apt-get autoclean
-	$ sudo apt-get --purge remove mysql*
-	$ sudo apt-get autoremove
-	$ sudo apt-get autoclean
-2.	$ sudo rm -rf /etc/mysql
-	$ sudo rm -rf /var/lib/mysql
-3.	$ sudo apt install mariadb-server
-	$ sudo mysql_secure_installation
+Очистка MariaDB при ошибках сервера:
+1.	sudo apt-get --purge remove mariadb*
+	sudo apt-get autoremove
+	sudo apt-get autoclean
+	sudo apt-get --purge remove mysql*
+	sudo apt-get autoremove
+	sudo apt-get autoclean
+2.	sudo rm -rf /etc/mysql
+	sudo rm -rf /var/lib/mysql
+3.	sudo apt install mariadb-server
+	sudo mysql_secure_installation
 		enter -> no -> yes*
-4.	$ sudo mariadb
-	$ CREATE DATABASE prochell_database;
-	$ GRANT ALL ON prochell_database.* TO 'prochell'@'localhost' IDENTIFIED BY '!Nike45240690!' WITH GRANT OPTION;
-	$ FLUSH PRIVILEGES;
+4.	sudo mariadb
+	CREATE DATABASE prochell_database;
+	GRANT ALL ON prochell_database.* TO 'prochell'@'localhost' IDENTIFIED BY '!Nike45240690!' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;
+
+Настройка виртуальной машины для запуска с основной (localhost)
+	В сетях прописать правила:
+---------------------------------------------------------------------
+| protocol	|	Host IP	|	Host Port	| Guest IP	| Guest Port	|
+---------------------------------------------------------------------
+| TCP		|			|	4242		| 10.0.2.15	|	4242		|
+---------------------------------------------------------------------
+| TCP		|			|	80			| 10.0.2.15	|	80			|
+---------------------------------------------------------------------
