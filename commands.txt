@@ -92,17 +92,17 @@ MariaDB - ответвление MySQL, отличие в отрытости р�
 	$ sudo apt install mariadb-server - установка
 	$ sudo mysql_secure_installation - настройка (везде yes, кроме установки пароля рута)
 	$ sudo mariadb - вход в оболочку MariaDB
-	$ CREATE DATABASE <database-name>; - создание базы (prochell_database)
+	$ CREATE DATABASE <database-name>; - создание базы (database_name)
 	$ GRANT ALL ON <database-name>.* TO '<username-2>'@'localhost' IDENTIFIED BY '<password-2>' WITH GRANT OPTION;
 		- создание пользователи для дб и предоставление ему полных привелегий для дб
-		(GRANT ALL ON <prochell_database>.* TO 'prochell'@'localhost' IDENTIFIED BY '**password**' WITH GRANT OPTION;)
+		(GRANT ALL ON <database_name>.* TO 'username'@'localhost' IDENTIFIED BY '**password**' WITH GRANT OPTION;)
 	$ FLUSH PRIVILEGES;
 	$ exit
 	$ mariadb -u <username-2> -p - проверка юзера
 	$ SHOW DATABASES; - проверка бд
 
 	$ sudo service mysql status - проверка состояния сервиса mysql
-	$ ssh prochell@10.21.31.81 -p 4242 - подключение через ssh к виртуальной машине
+	$ ssh username@10.21.31.81 -p 4242 - подключение через ssh к виртуальной машине
 
 
 Очистка MariaDB при ошибках сервера:
@@ -118,8 +118,8 @@ MariaDB - ответвление MySQL, отличие в отрытости р�
 	sudo mysql_secure_installation
 		enter -> no -> yes*
 4.	sudo mariadb
-	CREATE DATABASE prochell_database;
-	GRANT ALL ON prochell_database.* TO 'prochell'@'localhost' IDENTIFIED BY '!Nike45240690!' WITH GRANT OPTION;
+	CREATE DATABASE database_name;
+	GRANT ALL ON <database_name>.* TO '<username>'@'localhost' IDENTIFIED BY '<password></password>' WITH GRANT OPTION;
 	FLUSH PRIVILEGES;
 
 Настройка виртуальной машины для запуска с основной (localhost)
